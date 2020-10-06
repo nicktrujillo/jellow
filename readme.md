@@ -16,25 +16,25 @@ https://trello.com/
 ## Normal Mode
 Plan out and execute on the following features:
 
-* Login Page that uses Validation.
+* **Login Page that uses Validation.**
 
-* Dashboard (Home Page) that allows a user to create a new project and stores all projects that have been made.
+* **Dashboard (Home Page) that allows a user to create a new project and stores all projects that have been made.**
 
-* The individual project page requirements:
+* **The individual project page requirements:**
     * Ability to add a new column(s)
     * Button to go home
 
-* Column requirements:
+* **Column requirements:**
     * Title
     * Implement CRUD
     * Ability to add a new card
 
-* Card in Column requirements:
+* **Card in Column requirements:**
     * Title
     * Dropdown to move the card to different columns
     * The avatar of which user is assigned to the card
 
-* Card Detail requirements:
+* **Card Detail requirements:**
     * Title
     * Implement CRUD
     * Dropdown to move the card to different columns
@@ -47,12 +47,12 @@ Plan out and execute on the following features:
 
 On top of the normal mode adding the following: 
 
-* Column requirements:
+* **Column requirements:**
     * Ability to sort cards
 
-* Card in Column requirements:
+* **Card in Column requirements:**
     * Display labels
     * Ability to Drag and Drop cards to different columns
 
-* Card Detail requirements:
+* **Card Detail requirements:**
     * Ability to add and remove labels
