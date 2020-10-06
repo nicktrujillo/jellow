@@ -8,6 +8,7 @@ https://trello.com/
 ## Learning Objectives
 
 * Plan a full scale project using Trello
+* Use github to practice branching
 * Use backend processes to manipulate data
 * Deconstruct existing processes
 * Incorporate Validation
