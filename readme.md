@@ -3,7 +3,10 @@ Don't worry, this is a group project :D
 
 ## Description
 This assignment you a recreating Trello which is a web-based Kanban-style list-making application.
+
 https://trello.com/
+
+It should look and have the same functionality as Trello but feel free to add your own colors and style.
 
 ## Learning Objectives
 
@@ -22,6 +25,7 @@ Plan out and execute on the following features:
 * **Dashboard (Home Page) that allows a user to create a new project and stores all projects that have been made.**
 
 * **The individual project page requirements:**
+    * Title of board
     * Ability to add a new column(s)
     * Button to go home
 
@@ -36,12 +40,12 @@ Plan out and execute on the following features:
     * The avatar of which user is assigned to the card
 
 * **Card Detail requirements:**
+    * When clicked, the card should display as a modal
     * Title
-    * Implement CRUD
     * Dropdown to move the card to different columns
     * User
     * Ability to add user(s)
-    * Description of Card
+    * Description of Card CRUD
     
 
 ## Hard/Nightmare Mode
