@@ -22,8 +22,6 @@ Plan out and execute on the following features:
 
 * **Login Page that uses Validation.**
 
-* **Dashboard (Home Page) that allows a user to create a new project and stores all projects that have been made.**
-
 * **The individual project page requirements:**
     * Title of board
     * Ability to add a new column(s)
