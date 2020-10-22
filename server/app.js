@@ -1,12 +1,13 @@
 const express = require("express");
 const app = express();
+require('dotenv').config()
 const knex = require("knex")({
   client: "pg",
   version: "7.2",
   connection: {
     host: "127.0.0.1",
     user: "postgres",
-    password: "",
+    password: process.env.DB_PASSWORD || '',
     database: "jellow_app",
   },
 });
