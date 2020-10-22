@@ -57,7 +57,7 @@ app.get("/api/cards", async (req, res) => {
 });
 
 app.post("/api/cards", async (req, res) => {
-  const { description } = req.body;
+  const { description, column_id } = req.body;
   await knex.raw("INSERT INTO cards (description, column_id) VALUES (?, ?)", [
     description,
     column_id,
