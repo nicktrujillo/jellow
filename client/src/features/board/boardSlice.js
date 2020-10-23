@@ -12,11 +12,11 @@ export const boardSlice = createSlice({
     displayProjects: (state, action) => {
       state.projects = action.payload;
     },
-    displayCards: (state, action) => {
-      state.cards = action.payload;
-    },
     displayColumns: (state, action) => {
       state.columns = action.payload;
+    },
+    displayCards: (state, action) => {
+      state.cards = action.payload;
     },
   },
 });
@@ -32,7 +32,7 @@ export const {
 // will call the thunk with the `dispatch` function as the first argument. Async
 // code can then be executed and other actions can be dispatched
 export const getProjects = () => (dispatch) => {
-  axios.get("/api/projects").then((r) => dispatch(displayProjects(r.data)));
+  axios.get("/api/projects/1").then((r) => dispatch(displayProjects(r.data)));
 };
 export const getColumns = () => (dispatch) => {
   axios.get("/api/columns").then((r) => dispatch(displayColumns(r.data)));
@@ -41,20 +41,37 @@ export const getCards = () => (dispatch) => {
   axios.get("/api/cards").then((r) => dispatch(displayCards(r.data)));
 };
 
-export const addColumn = (title) => (dispatch) => {
-  axios.post("/api/columns", { title: title }).then((r) => {
-    dispatch(getColumns());
+export const addColumn = (obj) => (dispatch) => {
+  axios.post("/api/columns", { title: obj }).then((r) => {
+    dispatch(getProjects());
   });
 };
-
 export const removeColumn = (id) => (dispatch) => {
-  axios.delete("/api/todos/" + id).then((r) => {
-    dispatch(getTodo());
+  axios.delete("/api/columns/" + id).then((r) => {
+    dispatch(getProjects());
   });
 };
 export const updateColumn = (obj) => (dispatch) => {
-  axios.patch("/api/todos/" + obj.id, { status: obj.status }).then((r) => {
-    dispatch(getTodo());
+  axios.patch("/api/columns/" + obj.id, { status: obj.status }).then((r) => {
+    dispatch(getProjects());
+  });
+};
+
+export const addCard = (obj) => (dispatch) => {
+  axios
+    .post("/api/cards", { title: obj.description, column_id: obj.id })
+    .then((r) => {
+      dispatch(getProjects());
+    });
+};
+export const removeCard = (id) => (dispatch) => {
+  axios.delete("/api/columns/" + id).then((r) => {
+    dispatch(getProjects());
+  });
+};
+export const updateCard = (obj) => (dispatch) => {
+  axios.patch("/api/columns/" + obj.id, { status: obj.status }).then((r) => {
+    dispatch(getProjects());
   });
 };
 // The function below is called a selector and allows us to select a value from
@@ -64,4 +81,4 @@ export const selectProjects = (state) => state.board.projects;
 export const selectColumns = (state) => state.board.columns;
 export const selectCards = (state) => state.board.cards;
 
-export default dashboardSlice.reducer;
+export default boardSlice.reducer;
