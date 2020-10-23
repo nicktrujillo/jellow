@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -35,71 +36,50 @@ export function Board() {
 
   useEffect(() => {
     dispatch(getColumns());
-  }, [projects]);
+  }, []);
 
-  //   function handleSubmit(e) {
-  //     e.preventDefault();
-  //     dispatch(addTodo(inputText));
-  //     setInputText("");
-  //   }
-  //   function handleDelete(item) {
-  //     dispatch(removeTodo(item.id));
-  //   }
-  //   function handleUpdate(id, status) {
-  //     dispatch(updateTodo({ id, status }));
-  //   }
+  function handleDelete(item) {
+    console.log(item.id);
+    dispatch(removeColumn(item.id));
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(inputText);
+    dispatch(addColumn(inputText));
+    setInputText("");
+  }
 
   return (
-    <div className="container">
-      {/* <form className="todo-form" onSubmit={handleSubmit}>
-        <input
-          onChange={(e) => setInputText(e.target.value)}
-          className="todo-input"
-          placeholder="Enter your todo here"
-          value={inputText}
-        ></input>
-      </form>
-      {todo.map((item) => (
-        <div className="todo-item-container" key={item.id} id={item.id}>
-          <div className="todo-description">{item.description}</div>
-          <div className="todo-status-container">
-            <div className="todo-status">Status: {item.status}</div>
-            <div className="toggle-todo">
-              <div
-                className="todo-completed"
-                onClick={() => handleUpdate(item.id, "completed")}
-              >
-                Completed
-              </div>
-              <div
-                className="todo-active"
-                onClick={() => handleUpdate(item.id, "active")}
-              >
-                Active
-              </div>
-            </div>
-            <button
-              className="todo-delete-btn"
-              onClick={() => handleDelete(item)}
-            >
-              Delete todo
-            </button>
-          </div>
+    <div>
+      <div class="nav">
+        <h1>Jellow</h1>
+        <div>
+          <button class="logout">Log Out</button>
+          <img class="user" src="user.png" />
         </div>
-      ))} */}
+      </div>
       {projects.map((item) => (
         <div key={item.id}>
           <h1 className="project-title">{item.title}</h1>
         </div>
       ))}
-      <div className="column-container">
+      <div className="col-container">
         {columns.map((item) => (
-          <div className="column" key={item.id}>
-            <h2>{item.title}</h2>
+          <div className="col" key={item.id}>
+            <h3 class="list-title">{item.title}</h3>
             <Column id={item.id} />
-            <button>delete column</button>
+            <button onClick={() => handleDelete(item)}>delete column</button>
           </div>
         ))}
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="add new column"
+            onChange={(e) => setInputText(e.target.value)}
+            value={inputText}
+          ></input>
+        </form>
       </div>
     </div>
   );

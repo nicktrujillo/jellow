@@ -64,10 +64,10 @@ app.get("/api/cards/:id", async (req, res) => {
   res.json(cards);
 });
 app.post("/api/cards", async (req, res) => {
-  const { description, column_id } = req.body;
-  await knex.raw("INSERT INTO cards (description, column_id) VALUES (?, ?)", [
+  const { description } = req.body;
+  await knex.raw(`INSERT INTO cards (description, column_id) VALUES (?, ?)`, [
     description,
-    column_id,
+    req.body.id,
   ]);
   res.json("created card");
 });

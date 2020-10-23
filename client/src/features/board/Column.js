@@ -30,19 +30,37 @@ function Column(props) {
     axios.get(`/api/cards/${props.id}`).then((r) => {
       setCardList(r.data);
     });
-  }, [props.id]);
+  }, []);
+
+  function getCards() {
+    axios.get(`/api/cards/${props.id}`).then((r) => {
+      setCardList(r.data);
+    });
+    setInputText("");
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(addCard(inputText));
-    setInputText("");
+    axios
+      .post(`/api/cards`, { description: inputText, id: props.id })
+      .then((r) => {
+        getCards();
+      });
+  }
+
+  function handleDelete(item) {
+    console.log(item.id);
+    axios.delete(`/api/cards/${item.id}`).then((r) => {
+      getCards();
+    });
   }
 
   return (
     <div>
       {cardList.map((item) => (
-        <div key={item.id}>
+        <div className="list-items" key={item.id}>
           <p>{item.description}</p>
+          <button onClick={() => handleDelete(item)}>X</button>
         </div>
       ))}
       <form onSubmit={handleSubmit}>

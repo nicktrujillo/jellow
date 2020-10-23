@@ -51,12 +51,12 @@ export const getBoard = () => (dispatch) => {
 
 export const addColumn = (obj) => (dispatch) => {
   axios.post("/api/columns", { title: obj }).then((r) => {
-    dispatch(getProjects());
+    dispatch(getColumns());
   });
 };
 export const removeColumn = (id) => (dispatch) => {
   axios.delete("/api/columns/" + id).then((r) => {
-    dispatch(getProjects());
+    dispatch(getColumns());
   });
 };
 export const updateColumn = (obj) => (dispatch) => {
@@ -65,9 +65,9 @@ export const updateColumn = (obj) => (dispatch) => {
   });
 };
 
-export const addCard = (obj) => (dispatch) => {
+export const addCard = (description, id) => (dispatch) => {
   axios
-    .post("/api/cards", { title: obj.description, column_id: obj.id })
+    .post("/api/cards", { description: description, column_id: id })
     .then((r) => {
       dispatch(getProjects());
     });
