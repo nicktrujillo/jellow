@@ -7,6 +7,7 @@ import {
   getProjects,
   getColumns,
   getCards,
+  getBoard,
   addColumn,
   removeColumn,
   updateColumn,
@@ -16,12 +17,15 @@ import {
   selectProjects,
   selectColumns,
   selectCards,
+  selectBoard,
 } from "./boardSlice";
+import Column from "./Column";
 
 export function Board() {
   const projects = useSelector(selectProjects);
   const columns = useSelector(selectColumns);
   const cards = useSelector(selectCards);
+  const board = useSelector(selectBoard);
   const dispatch = useDispatch();
   const [inputText, setInputText] = useState("");
 
@@ -31,11 +35,7 @@ export function Board() {
 
   useEffect(() => {
     dispatch(getColumns());
-  }, [columns]);
-
-  useEffect(() => {
-    dispatch(getCards());
-  }, [cards]);
+  }, [projects]);
 
   //   function handleSubmit(e) {
   //     e.preventDefault();
@@ -89,19 +89,18 @@ export function Board() {
       ))} */}
       {projects.map((item) => (
         <div key={item.id}>
-          <h1>{item.title}</h1>
+          <h1 className="project-title">{item.title}</h1>
         </div>
       ))}
-      {columns.map((item) => (
-        <div key={item.id}>
-          <h2>{item.title}</h2>
-          {cards.map((item) => (
-            <div key={item.id}>
-              <p>{item.description}</p>
-            </div>
-          ))}
-        </div>
-      ))}
+      <div className="column-container">
+        {columns.map((item) => (
+          <div className="column" key={item.id}>
+            <h2>{item.title}</h2>
+            <Column id={item.id} />
+            <button>delete column</button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

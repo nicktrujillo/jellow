@@ -7,6 +7,7 @@ export const boardSlice = createSlice({
     projects: [],
     cards: [],
     columns: [],
+    board: [],
   },
   reducers: {
     displayProjects: (state, action) => {
@@ -16,7 +17,10 @@ export const boardSlice = createSlice({
       state.columns = action.payload;
     },
     displayCards: (state, action) => {
-      state.cards = action.payload;
+      state.cards.push(action.payload);
+    },
+    displayBoard: (state, action) => {
+      state.board.push(action.payload);
     },
   },
 });
@@ -25,6 +29,7 @@ export const {
   displayProjects,
   displayCards,
   displayColumns,
+  displayBoard,
 } = boardSlice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -37,8 +42,11 @@ export const getProjects = () => (dispatch) => {
 export const getColumns = () => (dispatch) => {
   axios.get("/api/columns").then((r) => dispatch(displayColumns(r.data)));
 };
-export const getCards = () => (dispatch) => {
-  axios.get("/api/cards").then((r) => dispatch(displayCards(r.data)));
+export const getCards = (id) => (dispatch) => {
+  axios.get(`/api/cards/${id}`).then((r) => dispatch(displayCards(r.data)));
+};
+export const getBoard = () => (dispatch) => {
+  axios.get("/api/board").then((r) => dispatch(displayBoard(r.data)));
 };
 
 export const addColumn = (obj) => (dispatch) => {
@@ -80,5 +88,6 @@ export const updateCard = (obj) => (dispatch) => {
 export const selectProjects = (state) => state.board.projects;
 export const selectColumns = (state) => state.board.columns;
 export const selectCards = (state) => state.board.cards;
+export const selectBoard = (state) => state.board.board;
 
 export default boardSlice.reducer;
