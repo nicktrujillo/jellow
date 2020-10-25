@@ -73,11 +73,11 @@ app.post("/api/cards", async (req, res) => {
 });
 app.patch("/api/cards/:id", async (req, res) => {
   const { id } = req.params;
-  const { description } = req.body;
-  await knex.raw("UPDATE cards SET description = ? WHERE id = ?", [
-    description,
-    id,
-  ]);
+  // const { description } = req.body;
+  await knex.raw(
+    "UPDATE cards SET description = ?, column_id =? WHERE id = ?",
+    [req.body.description, req.body.column_id, id]
+  );
   res.json("updated card");
 });
 app.delete("/api/cards/:id", async (req, res) => {

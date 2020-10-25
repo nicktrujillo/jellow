@@ -51,36 +51,44 @@ export function Board() {
   }
 
   return (
-    <div>
-      <div class="nav">
+    <>
+      <div className="nav">
         <h1>Jellow</h1>
         <div>
-          <button class="logout">Log Out</button>
-          <img class="user" src="user.png" />
+          <button className="logout">Log Out</button>
+          <img className="user" src="./user.jpg" />
         </div>
       </div>
       {projects.map((item) => (
         <div key={item.id}>
-          <h1 className="project-title">{item.title}</h1>
+          <h2 className="project-title">{item.title}</h2>
         </div>
       ))}
       <div className="col-container">
         {columns.map((item) => (
           <div className="col" key={item.id}>
-            <h3 class="list-title">{item.title}</h3>
+            <h6 class="list-title">{item.title}</h6>
             <Column id={item.id} />
-            <button onClick={() => handleDelete(item)}>delete column</button>
+            <button
+              className="btn xbtn x-col"
+              onClick={() => handleDelete(item)}
+            >
+              <i class="fa fa-trash-o"></i>
+            </button>
           </div>
         ))}
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="add new column"
-            onChange={(e) => setInputText(e.target.value)}
-            value={inputText}
-          ></input>
-        </form>
+        <div class="col">
+          <form onSubmit={handleSubmit}>
+            <input
+              className="btn add-col"
+              type="text"
+              placeholder="+ Add new column"
+              onChange={(e) => setInputText(e.target.value)}
+              value={inputText}
+            ></input>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
